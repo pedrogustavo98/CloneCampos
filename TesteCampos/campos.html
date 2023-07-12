@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="jquery.min.js"></script>
+    <script src="jquery.maskMoney.min.js"></script>
+    <title>Testes de ícones</title>
+
+    <style>
+        .quantidade {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="col-md-12 d-flex mt-5">
+        <div class="col-md-1">
+            <label for="quantidade">Quantidade</label>
+            <input type="number" min="1" class="quantidade" name="" id="quantidade">
+        </div>
+        <div class="col-md-2">
+            <label for="descricao">Descrição</label>
+            <input type="text" name="" id="descricao" class="descricao">
+        </div>
+        <div class="col-md-2">
+            <label for="valor_unitario">Valor unitário</label>
+            <input type="text" name="" class="valor_unitario" id="valor_unitario">
+        </div>
+        <div class="col-md-2">
+            <label for="valor_total">Valor Total</label>
+            <input type="text" name="" class="valor_total" readonly id="valor_total">
+        </div>
+        <div class="col-md-2">
+            <button onclick="adicionar()">+</button>
+        </div>
+    </div>
+    <div class="container-clones">
+
+    </div>
+</body>
+<script>
+
+
+    $('.quantidade').on('change', function () {
+        atualizaValor();
+    });
+
+    $('.valor_unitario').on('keyup', function () {
+        atualizaValor();
+    });
+
+
+    $('.valor_unitario').maskMoney({
+        prefix: 'R$ ',
+        allowNegative: true,
+        thousands: '.',
+        decimal: ','
+    });
+
+    function atualizaValor() {
+        let valor_unitario = $('.valor_unitario').val().replace('R$ ', '').replace(/\./g, '');
+        let v_unitario = valor_unitario.replace(',', '.');
+
+        let quantidade = $('.quantidade').val();
+
+        let resultado = v_unitario * quantidade;
+
+        $('.valor_total').val('R$ ' + resultado.toFixed(2));
+
+    }
+
+
+    let contador = 0;
+    function adicionar() {
+        contador++;
+        let campos = `<div class="col-md-12 d-flex mt-5">
+        <div class="col-md-1">
+            <label for="quantidade">Quantidade</label>
+            <input type="number" min="1" class="quantidade" name="" id="quantidade-${contador}">
+        </div>
+        <div class="col-md-2">
+            <label for="descricao">Descrição</label>
+            <input type="text" name="" id="descricao-${contador}" class="descricao">
+        </div>
+        <div class="col-md-2">
+            <label for="valor_unitario">Valor unitário</label>
+            <input type="text" name="" class="valor_unitario" id="valor_unitario-${contador}">
+        </div>
+        <div class="col-md-2">
+            <label for="valor_total">Valor Total</label>
+            <input type="text" name="" class="valor_total" readonly id="valor_total-${contador}">
+        </div>
+        </div>`;
+
+        $('.container-clones').append(campos);
+
+        $('.valor_unitario').maskMoney({
+            prefix: 'R$ ',
+            allowNegative: true,
+            thousands: '.',
+            decimal: ','
+        });
+
+        $('.quantidade').on('change', function () {
+            atualizaValor();
+        });
+
+        $('.valor_unitario').on('keyup', function () {
+            atualizaValor();
+        });
+
+
+    }
+</script>
+
+</html>

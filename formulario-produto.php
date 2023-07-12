@@ -5,6 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script src="jquery.mask.min.js"></script>
+  <script src="jquery.maskMoney.js"></script>
+  <script src="produtos.js"></script>
+  
+
   <title>Document</title>
 
   <style>
@@ -31,6 +38,7 @@
       cursor: pointer;
       color: #FFF !important;
     }
+
   </style>
 </head>
 
@@ -51,7 +59,8 @@
         </div>
         <div class="mt-4 d-flex">
           <div class="col-md-2">
-            <input type="tel" name="valor_unitario_peca[]" maxlength="20" class="apenas-numeros input-padrao form-control mr-2 required valor-unitario" id="valor_unitario-1" placeholder="V. Unitário" title="Valor unitário">
+            <input type="tel" name="valor_unitario_peca[]" maxlength="20" class="input-padrao form-control mr-2 required valor-unitario" id="valor_unitario-1" placeholder="0,00" title="Valor unitário">
+            
           </div>
           <div class="col-md-2">
             <input type="tel" name="sub_total_peca[]" maxlength="20" class="apenas-numeros input-padrao form-control mr-2 sub-total" id="sub_total-1" placeholder="Sub - Total" title="Sub-Total" readonly>
@@ -69,18 +78,13 @@
     </div>
     <p>-----------------SERVIÇO------------------</p>
 
-    <div class="row mt-5">
-      <div class="col-md-12">
-        <p class="sub-titulo pl-3">
-          DESCRIÇÕES DE SERVIÇOS
-        </p>
-      </div>
+    <div class="mt-5 col-md-12">
       <div id="servicos-container" class="pl-4 pr-4 pt-0 elemento-carro-cadastro col-md-12">
         <div class="carro-servico">
           <div class="row">
             <input type="hidden" name="quantidade[]" id='quantidade-1'><br>
             <div class="col-md-2">
-              <input type="number" class="form-control quantidade apenas-numeros required" placeholder="Quantidade" id="quantidade_servico" name="quantidade_servico[]" title="Quantidade">
+              <input type="number" class="form-control quantidade apenas-numeros required" min="1" placeholder="Quantidade" id="quantidade_servico" name="quantidade_servico[]" title="Quantidade">
             </div>
             <div class="col-md-8">
               <input type="text" class="form-control produto required" placeholder="Descrição do serviço" id="descricao_servico" name="descricao_servico[]" title="Descrição do serviço">
@@ -91,7 +95,7 @@
               <input type="tel" name="valor_unitario_peca[]" maxlength="20" class="apenas-numeros input-padrao form-control mr-2 required valor-unitario" id="valor_unitario-1" placeholder="V. Unitário" title="Valor unitário">
             </div>
             <div class="col-md-2">
-              <input type="tel" name="sub_total_servico[]" maxlength="20" class="apenas-numeros input-padrao form-control mr-2 required" id="sub_total_servico" placeholder="V. Total" title="Sub-Total" value="<?php echo $_POST['usuario'] ?>">
+              <input type="tel" name="sub_total_servico[]" maxlength="20" readonly class="apenas-numeros  input-padrao form-control mr-2 required sub-total-servico" id="sub_total_servico" placeholder="Sub - Total" title="Sub-Total">
             </div>
             <div class="col-md-1">
               <a class="adicionar" id="adicionar-servico" title="Adicionar">+</a>
@@ -116,10 +120,22 @@
         <label for="servicos">Total em serviços</label>
         <input type="text" id="servicos">
       </div>
+
+    </div>
+    <div class="teste">
+      <input type="text" name="" placeholder="R$ 0,00" class="mask-reais" id="">
     </div>
   </form>
-  <script src="produtos.js"></script>
-  <script src="servicos.js"></script>
+
+  <script>
+    // $('#valor_unitario-1').maskMoney({
+    //   symbol: 'R$ ',
+    //   allowNegative: true,
+    //   thousands: '.', decimal: ',',
+    //   affixesStay: true
+    // });
+  </script>
+
 </body>
 
 </html>
